@@ -160,7 +160,7 @@ $(window).on('load', function () {
         $.ajax({
             type: 'GET',
             // url: "http://{{ config['api']['host'] }}:{{ config['api']['port'] }}/api/info",
-            url: `${window.location["origin"]}/api/info`,
+            url: `${window.location["origin"]}/cqp4rdf/api/info`,
             data: {uri: uri, corpus: $("#corpus").val()}
         }).done(function (data) {
             if (data) {
@@ -182,7 +182,7 @@ $(window).on('load', function () {
         $.ajax({
             type: 'GET',
             // url: "http://{{ config['api']['host'] }}:{{ config['api']['port'] }}/api/query",
-            url: `${window.location["origin"]}/api/query`,
+            url: `${window.location["origin"]}/cqp4rdf/api/query`,
             data: {cqp: $("#cqp").val(), page: page, corpus: $("#corpus").val()}
         }).done(function (data) {
             if (data) {
