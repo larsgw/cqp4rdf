@@ -95,7 +95,7 @@ def linked_word(word):
     # "http://192.168.0.113:9999/blazegraph/#explore:kb:%3Cfile:///C:/Users/chiarcos/Desktop/corpus/armenian/EANC_sentences_sample///fiction.tsv#s187_1%3E"
 
 
-@app.route('/cqp4rdf/api/info')
+@app.route('/api/info')
 def word_info():
     word_uri = request.args.get('uri')
     corpus = request.args.get('corpus')
@@ -144,7 +144,7 @@ def word_info():
     return jsonify(res)
 
 
-@app.route('/cqp4rdf/api/query')
+@app.route('/api/query')
 def query():
     cqp = request.args.get('cqp')
     page = int(request.args.get('page'))  # config['n_results']
