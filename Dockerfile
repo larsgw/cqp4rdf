@@ -1,8 +1,8 @@
 # using the latest version of a basic light weight alpine os 
 FROM alpine:latest
 
-# install python3-dev
-RUN apk add --no-cache python3-dev 
+# install python3-dev & py3-pip
+RUN apk add --no-cache python3-dev py3-pip
 # upgrade python3 pip
 RUN pip3 install --upgrade pip
 # copy requirements.txt to /tmp/
