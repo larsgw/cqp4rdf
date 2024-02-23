@@ -64,8 +64,8 @@ def allChidren(parent):
     {{
         ?link a nif:Word .
         ?sentence a nif:Sentence .
-        ?link conll:HEAD* ?sentence . 
-        ?link conll:FORM ?word . 
+        ?link conll:HEAD* ?sentence .
+        ?link conll:FORM ?word .
         ?link conll:ID ?id
 
         FILTER(?sentence = <{parent}>)
@@ -113,7 +113,7 @@ def word_info():
 
     sparql = """{prefixes}
 
-    SELECT DISTINCT ?pred ?val 
+    SELECT DISTINCT ?pred ?val
     FROM <{corpus_iri}>
     WHERE
     {{
@@ -174,10 +174,10 @@ def query():
     sparqls = []
 
     for tree in trees:
-        # it's important not to reuse the transformers 
+        # it's important not to reuse the transformers
         transformer = cqp2sparql.CQP2SPARQLTransformer(prefixes, corpus_iri, config.get('search', {}))
         sparqls += [transformer.transform(tree)]
-        
+
     sparql = cqp2sparql.concat(sparqls) + "ORDER BY ?links OFFSET " + str((page-1) * config['n_results']) + " LIMIT " + str(config['n_results']+1)
 
     logging.info(sparql)
@@ -258,4 +258,3 @@ if __name__ == '__main__':
     conn = SPARQLWrapper(urllib.parse.urljoin(config['sparql']['host'], config['sparql']['endpoint']))
 
     app.run(debug=True, host=config['api']['host'], port=config['api']['port'])
-
