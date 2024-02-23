@@ -14,24 +14,24 @@
     <!-- <script src="bootstrap.min.js"></script> -->
     <!-- will add fontawesome later -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet">
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.0.2/nouislider.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.0.4/wNumb.min.js'></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    
+
 
     <script src="js/index.js"></script>
     <script type="text/javascript">
         myVar = send_config({{config|tojson}});
     </script>
-    
+
     <style type="text/css">
         .row{
             margin: 1%;
@@ -83,13 +83,13 @@ $(window).on('load', function () {
         for(i=0;i<data.length;i++){
             data_dict[data[i]['pred'].split(":")[1]]=data[i]['val'];
         }
-        
+
         for(i=0;i<order.length;i++){
             if(data_dict[order[i]]==undefined){
                 properties += '<tr>' + '<td>' + order[i] + '</td>'+ '<td> </td>'+'</tr>\n';
                 continue;
             }
-            
+
             field=all_fields[order[i]];
 
             if(field["multivalued"]==true){
@@ -97,15 +97,15 @@ $(window).on('load', function () {
                 val=data_dict[order[i]].split(separator);
                 for(j=0;j<val.length;j++){
                     properties+="<tr>";
-                    
+
                     if(j==0){
-                        properties+= '<td>' + order[i] + '</td>';    
+                        properties+= '<td>' + order[i] + '</td>';
                     }
                     else{
-                        properties+= '<td></td>'   
+                        properties+= '<td></td>'
                     }
 
-                    properties+= '<td>' + val[j] + '</td>'+'</tr>\n';    
+                    properties+= '<td>' + val[j] + '</td>'+'</tr>\n';
                 }
             }
             else{
@@ -135,7 +135,7 @@ $(window).on('load', function () {
         output.push('<tr><td class="kwic-results-header text-center">' + ['File','&nbsp;','Keywords', '&nbsp;'].join('</td><td>') + '</td></tr>');
         table.forEach(function(row) {
             output.push('<tr>');
-            
+
             link = row['keywords'][0]['link'];
             iri = config["corpora"][config["default"]]["iri"];
             file_name = link.replace(iri+"data/","");
@@ -277,9 +277,9 @@ $(window).on('load', function () {
                     </button>
                 </div>
             </div>
-            <div class="row">   
+            <div class="row">
                 <div class="word_list accordion col-xs-12 col-md-7" id="accordionExample1">
-                </div>              
+                </div>
                 <div class="dependency_list accordion col-xs-12 col-md-5" id="accordionExample2">
                 </div>
             </div>
