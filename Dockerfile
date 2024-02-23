@@ -1,29 +1,44 @@
-# using the latest version of a basic light weight alpine os 
+# Using the latest version of a basic lightweight Alpine OS
 FROM alpine:latest
 
-# install python3-dev & py3-pip
-RUN apk add --no-cache python3-dev py3-pip
-# upgrade python3 pip
-RUN pip3 install --upgrade pip
-# copy requirements.txt to /tmp/
-COPY ./requirements.txt /tmp/
-# install the dependencies in the requirements.txt recursively
-RUN pip3 install -r /tmp/requirements.txt
+# Install python3 and py3-pip
+RUN apk add --no-cache python3 py3-pip
 
-# making a repo where the code would be copied
+# No need to install virtualenv separately as we can use Python's built-in venv
+
+# Create a virtual environment using Python's built-in venv
+RUN python3 -m venv /app/venv
+
+# Activate the virtual environment for subsequent commands
+ENV PATH="/app/venv/bin:$PATH"
+
+# Now that we're using the virtual environment, we can safely upgrade pip
+# and install other packages without affecting the system-wide Python installation
+RUN pip install --no-cache-dir --upgrade pip
+
+# Copy requirements.txt to /tmp/
+COPY ./requirements.txt /tmp/
+
+# Install the dependencies in the requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Make a directory where the code will be copied
 RUN mkdir /cqp4rdf
-# copying the code present in ./cqp4rdf to /cqp4rdf/cqp4rdf of the container
+
+# Copy the code present in ./cqp4rdf to /cqp4rdf/cqp4rdf of the container
 COPY ./cqp4rdf /cqp4rdf/cqp4rdf
-# copying the grammar file to /cqp4rdf of the cntainer 
+
+# Copy the grammar file to /cqp4rdf of the container
 COPY ./cqp.ebnf /cqp4rdf
 
-# shift the working directory to /cqp4rdf/cqp4rdf/
+# Shift the working directory to /cqp4rdf/cqp4rdf/
 WORKDIR /cqp4rdf/cqp4rdf/
 
-# expose the port on which the app would be working
+# Expose the port on which the app will be working
 EXPOSE 8088
 
-# on entering the container the following command would run i.e. the ENTRYPOINT 
+# The command to run when entering the container, i.e., the ENTRYPOINT
 ENTRYPOINT ["python3"]
-# followed by the filename, so the app is running
+
+# The filename to follow the ENTRYPOINT, so the app is running
 CMD ["main.py"]
