@@ -8,7 +8,8 @@ n_results: 50
 api:
   port: 8088
   # would be running the flaks app locally
-  host: 127.0.0.1 
+  host: 127.0.0.1
+  path: /
 # host, port and the endpoint database name where our SPARQL endpoint is hosted
 sparql:
   host: http://127.0.0.1:3030/
