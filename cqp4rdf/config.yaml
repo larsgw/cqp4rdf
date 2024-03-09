@@ -9,6 +9,7 @@ api:
   port: 8088
   # would be running the flaks app on the docker container ... for that we need to un the app gloiballey on 0.0.0.0
   host: 0.0.0.0
+  path: /cqp4rdf/
 # host, port and the endpoint database name where our SPARQL endpoint is hosted
 sparql:
   # when using multiple containers then, other containers name is used in order to connect to that container 
